@@ -1,11 +1,10 @@
-<h1>Blog create</h1>
+{% extends "base.html" %}
 
-<a href="{{url}}">{{url_linktext}}</a>
+{% block title %}Create or Edit{% endblock %}
 
-{% if user.email %}
-  {{user.email}}
-  {{user.displayName}}
-{% endif %}
+{% block content %}
+<div class="container">
+<h1>Create / Edit</h1>
 
 {% if birthday %}
   <form action="{{ uri_for('birthdayCreate', edit=birthday.key.id()) }}" method="post">
@@ -52,7 +51,5 @@
 
   
 </form> 
-{{ birthday }}
-
-</body>
-</html>
+</div>
+{% endblock %}

@@ -7,8 +7,11 @@ handlers:
   static_files: favicon.ico
   upload: favicon\.ico
 
-- url: /bootstrap
-  static_dir: bootstrap
+- url: /static
+  static_dir: static
+
+- url: /bower
+  static_dir: bower
 
 - url: /birthday.*
   script: main.app

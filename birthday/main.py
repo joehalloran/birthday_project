@@ -28,7 +28,7 @@ from models import Owner, Birthday
 
 
 JINJA_ENVIRONMENT = jinja2.Environment(
-	loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
+	loader=jinja2.FileSystemLoader('templates'), #jinja2.FileSystemLoader(os.path.dirname(__file__)),
 	extensions=['jinja2.ext.autoescape'],
 	autoescape=True)
 JINJA_ENVIRONMENT.globals = {
@@ -48,7 +48,7 @@ class HomePage(webapp2.RequestHandler):
 			'url_linktext': url_linktext,
 		}
 
-		template = JINJA_ENVIRONMENT.get_template('templates/index.html')
+		template = JINJA_ENVIRONMENT.get_template('home.html')
 		self.response.write(template.render(template_values))
 
 
@@ -84,7 +84,7 @@ class BdayListView(webapp2.RequestHandler):
 			'birthdays': birthdays,
 		}
 
-		template = JINJA_ENVIRONMENT.get_template('templates/birthdaylist.html')
+		template = JINJA_ENVIRONMENT.get_template('birthdaylist.html')
 		self.response.write(template.render(template_values))
 
 class BdayDetailView(webapp2.RequestHandler):
@@ -105,7 +105,7 @@ class BdayDetailView(webapp2.RequestHandler):
 			'birthday': bDay
 		}
 
-		template = JINJA_ENVIRONMENT.get_template('templates/birthdaydetail.html')
+		template = JINJA_ENVIRONMENT.get_template('birthdaydetail.html')
 		self.response.write(template.render(template_values))
 
 class BdayCreateEditView(webapp2.RequestHandler):
@@ -130,7 +130,7 @@ class BdayCreateEditView(webapp2.RequestHandler):
 		except:
 			pass
 
-		template = JINJA_ENVIRONMENT.get_template('templates/create_birthday.html')
+		template = JINJA_ENVIRONMENT.get_template('create_birthday.html')
 		self.response.write(template.render(template_values))
 
 	def post(self):
@@ -191,7 +191,7 @@ class BdayDeleteView(webapp2.RequestHandler):
 			'birthday': bDay
 		}
 
-		template = JINJA_ENVIRONMENT.get_template('templates/birthdaydelete.html')
+		template = JINJA_ENVIRONMENT.get_template('birthdaydelete.html')
 		self.response.write(template.render(template_values))
 		
 
@@ -232,5 +232,5 @@ app = webapp2.WSGIApplication([
 	webapp2.Route(r'/birthdays/<bday_id>', handler=BdayDetailView, name='birthdayDetail'),
 ], debug=True) # TODO SET DEBUG TO FALSE
 
-app.error_handlers[404] = handle_404
-app.error_handlers[500] = handle_500
+#app.error_handlers[404] = handle_404
+#app.error_handlers[500] = handle_500

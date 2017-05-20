@@ -1,16 +1,9 @@
-<h1>Hello List</h1>
+{% extends "base.html" %}
 
-<a href="{{url}}">{{url_linktext}}</a>
+{% block title %}My birthdays{% endblock %}
 
-{% if user.email %}
-	{{user.email}}
-	{{user.displayName}}
-
-{% endif %}
-
-
-<br />
-{{user_id}}
+{% block content %}
+<div class="container">
 <br />
 {% for birthday in birthdays %}
 	{{birthday.firstName}}<br />
@@ -23,4 +16,6 @@
 	<a href = {{ uri_for('birthdayDelete', bday_id=birthday.key.id()) }}>Delete</a>
 	<hr />
 {% endfor %}
+</div>
+{% endblock %}
 

@@ -1,13 +1,9 @@
-<h1>Hello World</h1>
+{% extends "base.html" %}
 
-<a href="{{url}}">{{url_linktext}}</a>
+{% block title %}Delete{% endblock %}
 
-{% if user.email %}
-	{{user.email}}
-	{{user.displayName}}
-
-{% endif %}
-<hr />
+{% block content %}
+<div class="container">
 
 {{birthday.firstName}}<br />
 {{birthday.lastName}}<br />
@@ -18,3 +14,5 @@
 	<input type="submit" value="Submit">
 </form>
 <hr />
+</div>
+{% endblock %}

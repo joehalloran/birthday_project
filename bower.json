@@ -1,0 +1,22 @@
+{
+  "name": "birthday_project",
+  "homepage": "https://github.com/joehalloran/birthday_project",
+  "authors": [
+    "Joe Halloran"
+  ],
+  "description": "Remember your friends birthdays",
+  "main": "bithdays/main.py",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "birthday/bower",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7"
+  }
+}

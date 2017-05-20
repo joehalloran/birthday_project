@@ -1,16 +1,14 @@
-<h1>Hello World</h1>
+{% extends "base.html" %}
 
-<a href="{{url}}">{{url_linktext}}</a>
+{% block title %}{{birthday.firstname}}'s birthday{% endblock %}
 
-{% if user.email %}
-	{{user.email}}
-	{{user.displayName}}
-
-{% endif %}
-<hr />
+{% block content %}
+<div class="container">
 
 {{birthday.firstName}}<br />
 {{birthday.lastName}}<br />
 {{birthday.date}}<br />
 <a href = {{ uri_for('birthdayCreate', edit=birthday.key.id()) }}>Edit</a>
 <hr />
+</div>
+{% endblock %}
