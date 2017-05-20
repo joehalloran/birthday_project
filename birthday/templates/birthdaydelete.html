@@ -1,0 +1,20 @@
+<h1>Hello World</h1>
+
+<a href="{{url}}">{{url_linktext}}</a>
+
+{% if user.email %}
+	{{user.email}}
+	{{user.displayName}}
+
+{% endif %}
+<hr />
+
+{{birthday.firstName}}<br />
+{{birthday.lastName}}<br />
+{{birthday.date}}<br />
+<a href = {{ uri_for('birthdayCreate', edit=birthday.key.id()) }}>Edit</a>
+<form action="{{ uri_for('birthdayDelete', bday_id=birthday.key.id(), token=birthday.delete_token ) }}" method="post">
+	<p>Are you sure you want to delete?</p>
+	<input type="submit" value="Submit">
+</form>
+<hr />

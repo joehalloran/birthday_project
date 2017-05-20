@@ -1,0 +1,26 @@
+<h1>Hello List</h1>
+
+<a href="{{url}}">{{url_linktext}}</a>
+
+{% if user.email %}
+	{{user.email}}
+	{{user.displayName}}
+
+{% endif %}
+
+
+<br />
+{{user_id}}
+<br />
+{% for birthday in birthdays %}
+	{{birthday.firstName}}<br />
+	{{birthday.lastName}}<br />
+	{{birthday.date}}<br />
+	{{birthday.monthday}}
+	{{birthday.owner.identity}}
+	<a href = {{ uri_for('birthdayDetail', bday_id=birthday.key.id()) }}>View</a>
+	<a href = {{ uri_for('birthdayCreate', edit=birthday.key.id()) }}>Edit</a>
+	<a href = {{ uri_for('birthdayDelete', bday_id=birthday.key.id()) }}>Delete</a>
+	<hr />
+{% endfor %}
+
