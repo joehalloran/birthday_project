@@ -1,6 +1,13 @@
 runtime: python27
 api_version: 1
 threadsafe: true
+instance_class: B1
+automatic_scaling:
+  min_idle_instances: 1
+  max_idle_instances: 1
+  min_pending_latency: 30ms  # default value
+  max_pending_latency: automatic
+  max_concurrent_requests: 60 # Permissable range 8-80
 
 handlers:
 - url: /favicon\.ico
