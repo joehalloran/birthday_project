@@ -20,9 +20,15 @@ handlers:
 - url: /bower
   static_dir: bower
 
+# Ensure login required for birthday section
 - url: /birthday.*
   script: main.app
   login: required
+
+# Secure cron jobs against public consumption
+- url: /tasks.*
+  script: main.app
+  login: admin
 
 - url: /.*
   script: main.app

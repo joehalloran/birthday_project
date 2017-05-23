@@ -23,10 +23,13 @@ from google.appengine.ext import ndb
 import jinja2
 import webapp2
 
+import cron
 import utils
 from models import Owner, Birthday
+# [END imports]
 
 
+# [START Jinja config]
 JINJA_ENVIRONMENT = jinja2.Environment(
 	loader=jinja2.FileSystemLoader('templates'), #jinja2.FileSystemLoader(os.path.dirname(__file__)),
 	extensions=['jinja2.ext.autoescape'],
@@ -35,8 +38,7 @@ JINJA_ENVIRONMENT.globals = {
 	'uri_for': webapp2.uri_for,
 	'range':range
 }
-# [END imports]
-
+# [END Jinja config]
 
 class HomePage(webapp2.RequestHandler):
 	def get(self):
@@ -230,6 +232,7 @@ app = webapp2.WSGIApplication([
 	webapp2.Route(r'/birthdays/create', handler=BdayCreateEditView, name='birthdayCreate'),
 	webapp2.Route(r'/birthdays/delete/<bday_id>', handler=BdayDeleteView, name='birthdayDelete'),
 	webapp2.Route(r'/birthdays/<bday_id>', handler=BdayDetailView, name='birthdayDetail'),
+	webapp2.Route(r'/tasks/summary', handler=cron.Summary, name='cronSummary'),
 ], debug=True) # TODO SET DEBUG TO FALSE
 
 #app.error_handlers[404] = handle_404
