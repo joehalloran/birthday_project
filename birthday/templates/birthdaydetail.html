@@ -4,11 +4,16 @@
 
 {% block content %}
 <div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h1>{{birthday.firstName}} {{birthday.lastName}}</h1>
+      <h2>{{birthday.date.strftime('%d %B')}}</h2>
 
-{{birthday.firstName}}<br />
-{{birthday.lastName}}<br />
-{{birthday.date}}<br />
-<a href = {{ uri_for('birthdayCreate', edit=birthday.key.id()) }}>Edit</a>
-<hr />
-</div>
+      <div class="btn-group" role="group" aria-label="...">
+        <a class="btn btn-success" href = {{ uri_for('birthdayCreate', edit=birthday.key.id()) }}>Edit</a>
+        <a class="btn btn-danger" href = {{ uri_for('birthdayDelete', bday_id=birthday.key.id()) }}>Delete</a>
+      </div><!-- /.btn-group -->
+    </div> <!-- /.col -->
+  </div> <!-- /.row -->
+</div> <!-- \ -->
 {% endblock %}

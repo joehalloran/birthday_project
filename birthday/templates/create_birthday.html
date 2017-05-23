@@ -4,52 +4,64 @@
 
 {% block content %}
 <div class="container">
-<h1>Create / Edit</h1>
+  <div class="row">
+    <div class="col-md-6">
+    {% if birthday %}
+      <h1>Edit {{birthday.firstName}}'s birthday</h1>
+      <form action="{{ uri_for('birthdayCreate', edit=birthday.key.id()) }}" method="post">
+    {% else %}
+      <h1>Add a birthday</h1>
+      <form action="{{ uri_for('birthdayCreate')}}" method="post">
+    {% endif %}
 
-{% if birthday %}
-  <form action="{{ uri_for('birthdayCreate', edit=birthday.key.id()) }}" method="post">
-{% else %}
-  <form action="{{ uri_for('birthdayCreate')}}" method="post">
-{% endif %}
+        <div class="form-group">
+          <label for="first-name-input">First name</label>
+          <input type="text" name="first_name" class="form-control" value="{{ birthday.firstName if birthday }}" id="first-name-input" placeholder="First name">
+        </div> <!-- /.form-group -->
+        <div class="form-group">
+          <label for="last-name-input">Last name</label>
+          <input type="text" name="last_name"  class="form-control" value="{{ birthday.lastName if birthday }}" id="last-name-input" placeholder="Last name">
+        </div> <!-- /.form-group -->
+        <label>Date of birth</label>
+        <div class="form-inline">          
+          <div class="form-group">
+            <label for="birthday-date-input">Date</label>
+            <select name="day" required="required" class="form-control" id="birthday-date-input">
+              {% for i in range(1, 32) %}
+                <option value="{{"%02d"|format(i)}}" {{ "selected=selected" if birthday and birthday.date.day == i }}>{{i}}</option>
+              {% endfor %}
+            </select>
+          </div><!-- /.form-group -->
+          <div class="form-group">
+            <label for="birthday-month-input">Month</label>
+            <select name="month" required="required" class="form-control" id="birthday-month-input">
+                <option value="01" {{ "selected=selected" if birthday and birthday.date.month == 1 }}>January</option>
+                <option value="02" {{ "selected=selected" if birthday and birthday.date.month == 2 }}>February</option>
+                <option value="03" {{ "selected=selected" if birthday and birthday.date.month == 3 }}>March</option>
+                <option value="04" {{ "selected=selected" if birthday and birthday.date.month == 4 }}>April</option>
+                <option value="05" {{ "selected=selected" if birthday and birthday.date.month == 5 }}>May</option>
+                <option value="06" {{ "selected=selected" if birthday and birthday.date.month == 6 }}>June</option>
+                <option value="07" {{ "selected=selected" if birthday and birthday.date.month == 7 }}>July</option>
+                <option value="08" {{ "selected=selected" if birthday and birthday.date.month == 8 }}>August</option>
+                <option value="09" {{ "selected=selected" if birthday and birthday.date.month == 9 }}>September</option>
+                <option value="10" {{ "selected=selected" if birthday and birthday.date.month == 10 }}>October</option>
+                <option value="11" {{ "selected=selected" if birthday and birthday.date.month == 11 }}>November</option>
+                <option value="12" {{ "selected=selected" if birthday and birthday.date.month == 12 }}>December</option>
+            </select>
+          </div><!-- /.form-group -->
+          <div class="form-group">
+            <label for="birthday-year-input">Year</label>
+            <select name="year" class="form-control" id="birthday-year-input">
+              {% for i in range(current_year, current_year-120, -1) %}
+                  <option value="{{i}}" {{ "selected=selected" if birthday and birthday.date.year == i }}>{{i}}</option>
+              {% endfor %}
+            </select>
+          </div><!-- /.form-group -->
+        </div> <!-- /.form-line -->
+        <button type="submit" class="btn btn-primary">Submit</button>
 
-  Firstname:<br>
-  <input type="text" name="first_name" value="{{ birthday.firstName if birthday }}">
-  <br>
-  LastName:<br>
-  <input type="text" name="last_name" value="{{ birthday.lastName if birthday }}">
-  <br>
-  Date:
-  <select name="day" required="required" size="5">
-    {% for i in range(1, 32) %}
-      <option value="{{"%02d"|format(i)}}" {{ "selected=selected" if birthday and birthday.date.day == i }}>{{i}}</option>
-    {% endfor %}
-  </select>
-  Month:
-  <select name="month" required="required" size="5">
-      <option value="01" {{ "selected=selected" if birthday and birthday.date.month == 1 }}>January</option>
-      <option value="02" {{ "selected=selected" if birthday and birthday.date.month == 2 }}>February</option>
-      <option value="03" {{ "selected=selected" if birthday and birthday.date.month == 3 }}>March</option>
-      <option value="04" {{ "selected=selected" if birthday and birthday.date.month == 4 }}>April</option>
-      <option value="05" {{ "selected=selected" if birthday and birthday.date.month == 5 }}>May</option>
-      <option value="06" {{ "selected=selected" if birthday and birthday.date.month == 6 }}>June</option>
-      <option value="07" {{ "selected=selected" if birthday and birthday.date.month == 7 }}>July</option>
-      <option value="08" {{ "selected=selected" if birthday and birthday.date.month == 8 }}>August</option>
-      <option value="09" {{ "selected=selected" if birthday and birthday.date.month == 9 }}>September</option>
-      <option value="10" {{ "selected=selected" if birthday and birthday.date.month == 10 }}>October</option>
-      <option value="11" {{ "selected=selected" if birthday and birthday.date.month == 11 }}>November</option>
-      <option value="12" {{ "selected=selected" if birthday and birthday.date.month == 12 }}>December</option>
-  </select>
-  Year:
-  <select name="year" size="5">
-    {% for i in range(current_year, current_year-120, -1) %}
-        <option value="{{i}}" {{ "selected=selected" if birthday and birthday.date.year == i }}>{{i}}</option>
-    {% endfor %}
-  </select>
-  <br>
-  <input type="submit" value="Submit">
-  
-
-  
-</form> 
-</div>
+      </form>
+    </div> <!-- ./col -->
+  </div>  <!-- ./row -->
+</div> 
 {% endblock %}

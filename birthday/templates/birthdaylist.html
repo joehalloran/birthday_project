@@ -4,18 +4,23 @@
 
 {% block content %}
 <div class="container">
-<br />
-{% for birthday in birthdays %}
-	{{birthday.firstName}}<br />
-	{{birthday.lastName}}<br />
-	{{birthday.date}}<br />
-	{{birthday.monthday}}
-	{{birthday.owner.identity}}
-	<a href = {{ uri_for('birthdayDetail', bday_id=birthday.key.id()) }}>View</a>
-	<a href = {{ uri_for('birthdayCreate', edit=birthday.key.id()) }}>Edit</a>
-	<a href = {{ uri_for('birthdayDelete', bday_id=birthday.key.id()) }}>Delete</a>
-	<hr />
-{% endfor %}
-</div>
+	<div class="row">
+    </div class="col-md-12">
+      {% if birthdays %}
+        <h1>Your birthday list</h1>
+        {% for birthday in birthdays %}
+          <hr />
+          <h2>{{birthday.firstName}} {{birthday.lastName}}</h2>
+        	<h3>{{birthday.date.strftime('%d %B')}}</h3>
+          <div class="btn-group" role="group" aria-label="...">
+            <a class="btn btn-primary"  href = {{ uri_for('birthdayDetail', bday_id=birthday.key.id()) }}>View</a>
+            <a class="btn btn-success" href = {{ uri_for('birthdayCreate', edit=birthday.key.id()) }}>Edit</a>
+            <a class="btn btn-danger" href = {{ uri_for('birthdayDelete', bday_id=birthday.key.id()) }}>Delete</a>
+          </div><!-- /.btn-group -->
+        {% endfor %}
+      {% endif %}
+    </div> <!-- /.col -->
+  </div> <!-- /.row -->
+</div> <!-- /.container -->
 {% endblock %}
 

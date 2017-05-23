@@ -30,6 +30,7 @@ def get_user_details(uri):
 	return user, url, url_linktext
 
 def isOwner(user, birthday):
+	"""Checks ownership of a birthday object"""
 	if user.user_id() == birthday.owner.identity:
 		return True
 	else:
